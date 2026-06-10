@@ -1,0 +1,26 @@
+#LAMMPS input script that evaluates a system's energy without relaxing
+
+units metal
+atom_style atomic
+
+boundary m m m
+read_data diatom.dat
+
+print "Potential 2011--Zhou-X-W--Li-Na-K-Rb-Cs-F-Cl-Br-I--LAMMPS--ipr1 listed in the NIST Interatomic Potentials Repository:"
+print "https://www.ctcms.nist.gov/potentials/entry/2011--Zhou-X-W-Doty-F-P-Yang-P--Li-Na-K-Rb-Cs-F-Cl-Br-I/2011--Zhou-X-W--Li-Na-K-Rb-Cs-F-Cl-Br-I--LAMMPS--ipr1.html"
+print "Publication(s) related to the potential:"
+print "https://doi.org/10.1016/j.commatsci.2011.03.028"
+print "Parameter file(s) can be downloaded at:"
+print "https://www.ctcms.nist.gov/potentials/Download/2011--Zhou-X-W-Doty-F-P-Yang-P--Li-Na-K-Rb-Cs-F-Cl-Br-I/1/ffield.eim"
+
+pair_style eim 
+pair_coeff * * Cl ffield.eim Cl
+
+mass 1 35.45
+
+
+
+thermo_style custom step pe
+thermo_modify format float %.13e
+
+run 0
